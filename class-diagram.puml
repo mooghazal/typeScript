@@ -1,0 +1,53 @@
+@startuml Simple Notes Management System
+hide circle
+skinparam classAttributeIconSize 0
+
+class User {
+  +Id: number
+  +name: string
+  +email: string
+  -password: string
+  +Phone: string
+  -_age: number
+  +notebooks: Notebook[]
+  +displayInfo(): void
+  +get age(): number
+  +set age(value: number)
+  +setPassword(password: string): void
+  +addNotebook(notebook: Notebook): void
+  +removeNotebook(notebook: Notebook): boolean
+}
+
+class Admin {
+  +manageNotes(action: "add" | "remove", notebook: NoteBook, note: Note): void
+}
+
+class Note {
+  +Id: number
+  +tittle: string
+  +content: string
+  +userId: User
+  +preview(length: number): string
+}
+
+class NoteBook {
+  +Id: number
+  +name: string
+  -notes: Note[]
+  +addNote(note: Note): void
+  +removeNote(note: Note): boolean
+  +getNotes(): readonly Note[]
+}
+
+class Storage<T> {
+  -items: T[]
+  +addItem(item: T): void
+  +removeItem(item: T): boolean
+  +getAllItems(): readonly T[]
+}
+
+User <|-- Admin : Inheritance
+NoteBook *-- "0..*" Note : Composition
+User o-- "0..*" NoteBook : Aggregation
+User "1" <-- "0..*" Note : Association
+@enduml

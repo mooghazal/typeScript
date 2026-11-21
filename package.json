@@ -1,0 +1,9 @@
+{
+  "name": "simple-notes-management",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build && node dist/main.js"
+  }
+}
